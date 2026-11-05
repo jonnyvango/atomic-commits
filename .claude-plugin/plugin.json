@@ -1,0 +1,9 @@
+{
+  "name": "atomic-commits",
+  "description": "Commit finished work as small, atomic commits, handed off to a dedicated committer agent.",
+  "version": "1.0.0",
+  "author": { "name": "Jonny Vango", "url": "https://github.com/jonnyvango" },
+  "repository": "https://github.com/jonnyvango/atomic-commits",
+  "license": "MIT",
+  "keywords": ["git", "commits", "atomic-commits", "workflow"]
+}

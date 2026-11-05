@@ -1,0 +1,14 @@
+{
+  "name": "atomic-commits",
+  "owner": { "name": "Jonny Vango", "url": "https://github.com/jonnyvango" },
+  "description": "The atomic-commits skill and its committer agent for Claude Code.",
+  "plugins": [
+    {
+      "name": "atomic-commits",
+      "source": "./",
+      "description": "Commit finished work as small, atomic commits, handed off to a dedicated committer agent.",
+      "category": "workflow",
+      "keywords": ["git", "commits", "atomic-commits"]
+    }
+  ]
+}
