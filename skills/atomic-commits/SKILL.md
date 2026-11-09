@@ -1,7 +1,7 @@
 ---
 name: atomic-commits
-description: Commit finished work as small atomic commits. Invoke each time a unit of work is done and its check passes, when uncommitted changes have piled up, or before finishing with unpushed commits. Not at the start of a task. Pass what changed and why, in a sentence or two, as the argument.
-argument-hint: [what changed and why]
+description: Commit finished work as small atomic commits. Invoke each time a unit of work is done and its check passes, when uncommitted changes have piled up, or before finishing with unpushed commits. Not at the start of a task. Pass as the argument what changed and why, in a sentence or two, and the check command that passed.
+argument-hint: [what changed and why; check that passed]
 context: fork
 model: sonnet
 agent: atomic-commits:committer
@@ -25,7 +25,7 @@ Commit only the changes this context describes. Leave everything else uncommitte
 
 ## Check
 
-Run the project's own check and tests once, silenced (for example `pnpm check >/dev/null && pnpm test >/dev/null`). If the project has none, skip this step. Rerun with output only if it fails. If it fails, don't commit: report the failure.
+If the caller's context names a check that passed, don't rerun it. Otherwise run the project's own check and tests once, silenced (for example `pnpm check >/dev/null && pnpm test >/dev/null`). If the project has none, skip this step. Rerun with output only if it fails. If it fails, don't commit: report the failure.
 
 ## Committing part of a file
 
