@@ -1,6 +1,7 @@
 ---
 name: atomic-commits
-description: Commit finished work as small atomic commits. Invoke each time a unit of work is done and its check passes, when uncommitted changes have piled up, or before finishing with unpushed commits. Not at the start of a task.
+description: Commit finished work as small atomic commits. Invoke each time a unit of work is done and its check passes, when uncommitted changes have piled up, or before finishing with unpushed commits. Not at the start of a task. Pass what changed and why, in a sentence or two, as the argument.
+argument-hint: [what changed and why]
 context: fork
 model: sonnet
 agent: atomic-commits:committer
@@ -9,6 +10,12 @@ agent: atomic-commits:committer
 # Atomic commits
 
 Commit the work in this repo. Read the state with `git status --short` and `git diff --stat`. If there is no repo yet, run `git init -b master` and commit a `.gitignore` first.
+
+## Context from the caller
+
+$ARGUMENTS
+
+Commit only the changes this context describes. Leave everything else uncommitted. If the context is empty, every change is in scope.
 
 ## Units
 
@@ -31,7 +38,7 @@ Check with `git diff --cached --stat` before committing.
 
 ## Messages
 
-Plain imperative subject of 50 characters or fewer, no `feat:`-style prefix. Add a body only when the why isn't obvious.
+Plain imperative subject of 50 characters or fewer, no `feat:`-style prefix. Take the why from the caller's context. Add a body only when the subject doesn't make it obvious.
 
 ## Fixups (unpushed commits only)
 
@@ -39,4 +46,4 @@ If a change belongs to an earlier commit: `git commit --fixup=<sha>`, then `GIT_
 
 ## Report
 
-`git log --oneline -n <commits you made>` and nothing else.
+`git log --oneline -n <commits you made>`, then each file you left uncommitted, one per line. Nothing else.
