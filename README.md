@@ -10,6 +10,8 @@ When a unit of work is done and its checks pass, Claude invokes the `atomic-comm
 - keeps tests with the code they test, and lockfiles with their dependency change
 - stages parts of files with patches when one file holds several changes
 - runs the project's check and tests before committing, unless Claude says a check already passed, and refuses to commit if they fail
+- stages files by name, and never commits secrets, build output, logs or dependency folders
+- never skips hooks with `--no-verify`, and reports a failing hook instead of working around it
 - stops if there is no git repo, rather than creating one in the wrong place
 - writes plain imperative subjects of 50 characters or fewer, with no `feat:` prefixes
 - folds late fixes into earlier unpushed commits with `--fixup` and autosquash, and never rewrites pushed history

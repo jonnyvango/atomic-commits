@@ -23,6 +23,11 @@ Commit only the changes this context describes. Leave everything else uncommitte
 - Mechanical changes (renames, moves, formatting) go first, in their own commit.
 - Tests go with the code they test. The lockfile goes with its dependency change.
 
+## Staging
+
+- Stage files by name. Never `git add -A` or `git add .`.
+- Never commit secrets (`.env` files, keys, credentials), build output, logs or dependency folders. Leave them uncommitted.
+
 ## Check
 
 If the caller's context names a check that passed, don't rerun it. Otherwise run the project's own check and tests once, silenced (for example `pnpm check >/dev/null && pnpm test >/dev/null`). If the project has none, skip this step. Rerun with output only if it fails. If it fails, don't commit: report the failure.
@@ -35,6 +40,10 @@ If the caller's context names a check that passed, don't rerun it. Otherwise run
 4. `git apply --cached --recount /tmp/p.patch`
 
 Check with `git diff --cached --stat` before committing.
+
+## Hooks
+
+Never pass `--no-verify`. If a hook rewrites files, stage its changes to the files in that commit and commit again. If a hook fails, don't work around it: report its output.
 
 ## Messages
 
