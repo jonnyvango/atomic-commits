@@ -43,7 +43,7 @@ Check with `git diff --cached --stat` before committing.
 
 ## Hooks
 
-Never pass `--no-verify`. If a hook rewrites files, stage its changes to the files in that commit and commit again. If a hook fails, don't work around it: report its output.
+Never pass `--no-verify`. If a hook rewrites files, stage its changes to the files in that commit and commit again. If a hook fails, don't work around it: unstage, then report its output.
 
 ## Messages
 
@@ -55,4 +55,4 @@ If a change belongs to an earlier commit: `git commit --fixup=<sha>`, then `GIT_
 
 ## Report
 
-`git log --oneline -n <commits you made>`, then each file you left uncommitted, one per line. Nothing else.
+`git log --oneline -n <commits you made>`, then each file you left uncommitted, one per line. On failure, report only the failure. Nothing else.
