@@ -9,7 +9,7 @@ agent: atomic-commits:committer
 
 # Atomic commits
 
-Commit the work in this repo. Read the state with `git status --short` and `git diff --stat`. If there is no repo yet, run `git init -b master` and commit a `.gitignore` first.
+Commit the work in this repo. Read the state with `git status --short` and `git diff --stat`. If `git rev-parse --show-toplevel` fails, there is no repo: report that and stop. Create one with `git init -b master` only if the caller's context asks for a new repo, and commit a `.gitignore` first.
 
 ## Context from the caller
 
