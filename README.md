@@ -2,17 +2,15 @@
 
 A [Claude Code](https://claude.com/claude-code) plugin that commits finished work as small, atomic commits.
 
-When a unit of work is done and its checks pass, Claude invokes the `atomic-commits` skill. The skill runs in a forked context on a dedicated `committer` agent (Sonnet, Bash only), so the commit work stays out of your main conversation. Claude passes it a sentence or two about what changed and why, and the check that passed, since the agent can't see the conversation. It:
+When a unit of work is done and its checks pass, Claude invokes the `atomic-commits` skill. The skill runs in a forked context on a dedicated `committer` agent (Sonnet, Bash only), so the commit work stays out of your main conversation. It:
 
-- commits only the changes that context describes, and lists anything it leaves uncommitted
+- commits only what Claude says it changed, and lists anything it leaves uncommitted
 - splits changes into one commit per idea you can describe without "and"
 - puts mechanical changes (renames, moves, formatting) first, in their own commits
 - keeps tests with the code they test, and lockfiles with their dependency change
 - stages parts of files with patches when one file holds several changes
-- runs the project's check and tests before committing, unless Claude says a check already passed, and refuses to commit if they fail
-- stages files by name, and never commits secrets, build output, logs or dependency folders
-- never skips hooks with `--no-verify`, and reports a failing hook instead of working around it
-- stops if there is no git repo, rather than creating one in the wrong place
+- runs the project's check and tests before committing, and refuses to commit if they fail
+- never commits secrets or generated files, and never skips hooks
 - writes plain imperative subjects of 50 characters or fewer, with no `feat:` prefixes
 - folds late fixes into earlier unpushed commits with `--fixup` and autosquash, and never rewrites pushed history
 
@@ -27,13 +25,7 @@ In Claude Code:
 
 ## Use
 
-Claude picks the skill up by itself when work is ready to commit. You can also run it directly with `/atomic-commits`, optionally followed by what changed and why:
-
-```
-/atomic-commits Add retry to the uploader so flaky networks don't drop files; pnpm test passed
-```
-
-With no argument, every uncommitted change is in scope.
+Claude picks the skill up by itself when work is ready to commit. You can also run it directly with `/atomic-commits`, optionally followed by what changed and why.
 
 To make Claude commit as it goes, add this to your `~/.claude/CLAUDE.md`:
 
